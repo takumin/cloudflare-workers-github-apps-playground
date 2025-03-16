@@ -25,6 +25,9 @@
 		"destroy": "wrangler delete --force",
 		"typegen": "wrangler types && tsc"
 	},
+	"dependencies": {
+		"@octokit/app": "15.1.5"
+	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "0.8.0",
 		"@types/node": "22.13.10",
