@@ -1,6 +1,6 @@
-# cloudflare-workers-playground
+# cloudflare-workers-github-apps-playground
 
-Cloudflare Workers Playground
+Cloudflare Workers GitHub Apps Playground
 
 ## Setup
 
