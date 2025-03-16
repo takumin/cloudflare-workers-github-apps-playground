@@ -22,6 +22,9 @@ export default {
 		});
 
 		const installationId = Number(env.INSTALLATION_ID);
+		if (Number.isNaN(installationId)) {
+			return new Response("Invalid INSTALLATION_ID", { status: 400 });
+		}
 
 		const installationOctokit =
 			await app.getInstallationOctokit(installationId);
