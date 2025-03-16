@@ -1,0 +1,23 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:best-practices",
+		"github>aquaproj/aqua-renovate-config#2.7.5"
+	],
+	"timezone": "Asia/Tokyo",
+	"automerge": true,
+	"lockFileMaintenance": {
+		"enabled": true
+	},
+	"packageRules": [
+		{
+			"groupName": "node",
+			"matchPackageNames": ["node", "nodejs/node"],
+			"versioning": "node"
+		},
+		{
+			"groupName": "pnpm",
+			"matchPackageNames": ["pnpm", "pnpm/pnpm"]
+		}
+	]
+}

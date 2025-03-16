@@ -1,0 +1,28 @@
+# http://editorconfig.org
+root = true
+
+[*]
+charset                  = utf-8
+end_of_line              = lf
+indent_style             = tab
+indent_size              = 2
+trim_trailing_whitespace = true
+insert_final_newline     = true
+
+[*.{sh,bash}]
+switch_case_indent = true
+space_redirects    = true
+binary_next_line   = true
+function_next_line = true
+
+[*.{yaml,yml}]
+indent_style = space
+
+[*.toml]
+indent_style = space
+
+[{LICENSE,*.md}]
+indent_style = unset
+
+[worker-configuration.d.ts]
+indent_style = unset

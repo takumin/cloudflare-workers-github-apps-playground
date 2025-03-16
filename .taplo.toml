@@ -1,0 +1,7 @@
+exclude = [
+  ".git/**/*.toml",
+  "node_modules/**/*.toml",
+]
+
+[formatting]
+column_width = 0

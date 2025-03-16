@@ -1,0 +1,25 @@
+---
+name: Self Approval
+on:
+  pull_request:
+    types:
+    - 'opened'
+    - 'reopened'
+    - 'synchronize'
+    - 'ready_for_review'
+permissions: {}
+jobs:
+  approval:
+    name: Self Approval
+    if: ${{ github.event.pull_request.user.login == github.repository_owner && ! github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      pull-requests: write
+    steps:
+    - name: Self Approval
+      run: gh pr review --repo "${REPOSITORY}" --approve "${PR_NUMBER}"
+      env:
+        REPOSITORY: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.number }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

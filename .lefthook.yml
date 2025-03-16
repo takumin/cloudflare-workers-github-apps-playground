@@ -1,0 +1,59 @@
+---
+pre-commit:
+  commands:
+    editorconfig-checker:
+      run: editorconfig-checker
+      stage_fixed: true
+    biome:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: biome check --write --no-errors-on-unmatched --config-path=biome.json {staged_files}
+      stage_fixed: true
+    yamlfmt:
+      glob: "*.{yml,yaml}"
+      run: yamlfmt -no_global_conf -conf .yamlfmt.yml {staged_files}
+      stage_fixed: true
+    taplo-format:
+      glob: "*.{toml}"
+      run: taplo format --no-auto-config --config .taplo.toml {staged_files}
+      stage_fixed: true
+    taplo-lint:
+      glob: "*.{toml}"
+      run: taplo lint --no-auto-config --config .taplo.toml {staged_files}
+      stage_fixed: true
+    actionlint:
+      glob: ".github/workflows/*.{yml,yaml}"
+      run: actionlint {staged_files}
+      stage_fixed: true
+    ghalint-act:
+      glob: ".github/**/*.{yml,yaml}"
+      run: ghalint act
+      stage_fixed: true
+    ghalint-run:
+      glob: ".github/**/*.{yml,yaml}"
+      run: ghalint run
+      stage_fixed: true
+pre-push:
+  commands:
+    editorconfig-checker:
+      run: editorconfig-checker
+    biome:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: biome check --no-errors-on-unmatched --config-path=biome.json {push_files}
+    yamlfmt:
+      glob: "*.{yml,yaml}"
+      run: yamlfmt -lint -no_global_conf -conf .yamlfmt.yml {push_files}
+    taplo-format:
+      glob: "*.{toml}"
+      run: taplo format --check --no-auto-config --config .taplo.toml {push_files}
+    taplo-lint:
+      glob: "*.{toml}"
+      run: taplo lint --no-auto-config --config .taplo.toml {push_files}
+    actionlint:
+      glob: ".github/workflows/*.{yml,yaml}"
+      run: actionlint {push_files}
+    ghalint-act:
+      glob: ".github/**/*.{yml,yaml}"
+      run: ghalint act
+    ghalint-run:
+      glob: ".github/**/*.{yml,yaml}"
+      run: ghalint run
