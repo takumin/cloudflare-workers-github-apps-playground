@@ -19,3 +19,7 @@ To run:
 ```bash
 pnpm run dev
 ```
+
+# Reference
+
+- [OctokitとGitHub AppsでGitHub APIを叩く - zzzmisa's blog](https://blog.zzzmisa.com/octokit-with-github-app/)
