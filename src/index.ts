@@ -11,9 +11,27 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { App } from "@octokit/app";
+
 export default {
 	// eslint-disable-next-line no-unused-vars
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response("Hello World!");
+		const app = new App({
+			appId: env.APP_ID,
+			privateKey: env.PRIVATE_KEY,
+		});
+
+		const installationId = Number(env.INSTALLATION_ID);
+
+		const installationOctokit =
+			await app.getInstallationOctokit(installationId);
+
+		const { data } = await installationOctokit.request(
+			"GET /installation/repositories",
+		);
+
+		return new Response(JSON.stringify(data), {
+			headers: { "Content-Type": "application/json" },
+		});
 	},
 } satisfies ExportedHandler<Env>;
