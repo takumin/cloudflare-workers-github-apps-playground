@@ -19,6 +19,6 @@ packages:
 - name: evilmartians/lefthook@v1.11.4
 - name: rhysd/actionlint@v1.7.7
 - name: suzuki-shunsuke/ghalint@v1.2.3
-- name: suzuki-shunsuke/pinact@v2.0.4
+- name: suzuki-shunsuke/pinact@v2.1.0
 - name: editorconfig-checker/editorconfig-checker@v3.2.1
 - name: oxc-project/oxc/oxlint@oxlint_v0.16.0
