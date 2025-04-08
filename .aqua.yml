@@ -16,7 +16,7 @@ packages:
 - name: biomejs/biome@cli/v1.9.4
 - name: google/yamlfmt@v0.16.0
 - name: tamasfe/taplo@0.9.3
-- name: evilmartians/lefthook@v1.11.7
+- name: evilmartians/lefthook@v1.11.8
 - name: rhysd/actionlint@v1.7.7
 - name: suzuki-shunsuke/ghalint@v1.3.0
 - name: suzuki-shunsuke/pinact@v3.0.1
