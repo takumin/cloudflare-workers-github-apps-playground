@@ -14,7 +14,7 @@ packages:
   version: v22.14.0 # renovate: depName=nodejs/node
 - name: pnpm/pnpm@v10.30.1
 - name: biomejs/biome@cli/v1.9.4
-- name: google/yamlfmt@v0.16.0
+- name: google/yamlfmt@v0.21.0
 - name: tamasfe/taplo@0.9.3
 - name: evilmartians/lefthook@v1.13.6
 - name: rhysd/actionlint@v1.7.11
