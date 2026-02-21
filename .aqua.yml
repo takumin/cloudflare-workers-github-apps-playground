@@ -20,5 +20,5 @@ packages:
 - name: rhysd/actionlint@v1.7.11
 - name: suzuki-shunsuke/ghalint@v1.3.0
 - name: suzuki-shunsuke/pinact@v3.9.0
-- name: editorconfig-checker/editorconfig-checker@v3.2.1
+- name: editorconfig-checker/editorconfig-checker@v3.6.1
 - name: oxc-project/oxc/oxlint@oxlint_v0.16.0
