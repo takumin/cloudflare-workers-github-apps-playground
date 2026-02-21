@@ -19,5 +19,18 @@
 			"groupName": "pnpm",
 			"matchPackageNames": ["pnpm", "pnpm/pnpm"]
 		}
+	],
+	"customManagers": [
+		{
+			"customType": "regex",
+			"managerFilePatterns": ["/(^|\\/)aqua\\.ya?ml$/"],
+			"matchStrings": [
+				"(?<indentation>\\s*)version:\\s*v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*#\\s*renovate:\\s*datasource=github-releases\\s*depName=nodejs/node"
+			],
+			"depNameTemplate": "nodejs/node",
+			"datasourceTemplate": "github-releases",
+			"versioningTemplate": "semver",
+			"autoReplaceStringTemplate": "{{{indentation}}}version: {{{prettyNewVersion}}} # renovate: datasource=github-releases depName=nodejs/node"
+		}
 	]
 }
