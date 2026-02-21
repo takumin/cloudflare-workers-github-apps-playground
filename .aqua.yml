@@ -18,7 +18,7 @@ packages:
 - name: tamasfe/taplo@0.9.3
 - name: evilmartians/lefthook@v1.13.6
 - name: rhysd/actionlint@v1.7.11
-- name: suzuki-shunsuke/ghalint@v1.3.0
+- name: suzuki-shunsuke/ghalint@v1.5.5
 - name: suzuki-shunsuke/pinact@v3.9.0
 - name: editorconfig-checker/editorconfig-checker@v3.6.1
 - name: oxc-project/oxc/oxlint@oxlint_v0.16.0
