@@ -11,7 +11,7 @@ runs:
       echo "store-path=$(pnpm store path)" >> $GITHUB_OUTPUT
   - name: Restore Cache
     id: cache-primes-restore
-    uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+    uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
     with:
       key: pnpm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       path: |-
@@ -36,7 +36,7 @@ runs:
       DEFAULT_BRANCH: ${{ steps.gh.outputs.default_branch_ref_name }}
   - name: Save Cache
     if: github.ref_name == steps.gh.outputs.default_branch_ref_name && steps.cache-primes-restore.outputs.cache-hit != 'true'
-    uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+    uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
     with:
       key: ${{ steps.cache-primes-restore.outputs.cache-primary-key }}
       path: |-
