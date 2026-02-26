@@ -29,7 +29,7 @@
 		"@octokit/app": "16.1.2"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "0.12.15",
+		"@cloudflare/vitest-pool-workers": "0.12.16",
 		"@types/node": "24.10.13",
 		"typescript": "5.9.3",
 		"vitest": "3.2.4",
