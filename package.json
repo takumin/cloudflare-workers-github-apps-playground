@@ -32,7 +32,7 @@
 		"@cloudflare/vitest-pool-workers": "0.12.21",
 		"@types/node": "24.13.0",
 		"typescript": "6.0.3",
-		"vitest": "3.2.4",
+		"vitest": "3.2.6",
 		"wrangler": "4.98.0"
 	},
 	"pnpm": {
