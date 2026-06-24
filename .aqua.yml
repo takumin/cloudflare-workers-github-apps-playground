@@ -11,7 +11,7 @@ registries:
   ref: v4.527.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: nodejs/node
-  version: v24.17.0 # renovate: datasource=github-releases depName=nodejs/node
+  version: v24.18.0 # renovate: datasource=github-releases depName=nodejs/node
 - name: pnpm/pnpm@v11.9.0
 - name: biomejs/biome@cli/v1.9.4
 - name: google/yamlfmt@v0.21.0
