@@ -3,10 +3,10 @@
 	"version": "0.0.0",
 	"private": true,
 	"license": "Apache-2.0",
-	"packageManager": "pnpm@10.34.5",
+	"packageManager": "pnpm@11.15.1",
 	"engines": {
 		"node": "24.18.0",
-		"pnpm": "10.34.5",
+		"pnpm": "11.15.1",
 		"npm": "USE_PNPM"
 	},
 	"scripts": {
@@ -34,8 +34,5 @@
 		"typescript": "7.0.2",
 		"vitest": "3.2.7",
 		"wrangler": "4.112.0"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": ["esbuild", "sharp", "workerd"]
 	}
 }
