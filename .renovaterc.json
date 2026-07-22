@@ -13,7 +13,8 @@
 		{
 			"groupName": "node",
 			"matchPackageNames": ["node", "nodejs/node"],
-			"versioning": "node"
+			"versioning": "node",
+			"separateMajorMinor": false
 		},
 		{
 			"groupName": "pnpm",
