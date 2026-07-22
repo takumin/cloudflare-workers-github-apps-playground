@@ -18,7 +18,8 @@
 		},
 		{
 			"groupName": "pnpm",
-			"matchPackageNames": ["pnpm", "pnpm/pnpm"]
+			"matchPackageNames": ["pnpm", "pnpm/pnpm"],
+			"separateMajorMinor": false
 		}
 	],
 	"customManagers": [
