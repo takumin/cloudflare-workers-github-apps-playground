@@ -26,9 +26,11 @@ describe("GitHub Apps API worker", () => {
 		const mockGetInstallationOctokit = vi.fn().mockResolvedValue({
 			request: vi.fn().mockResolvedValue({ data: mockRepositoriesData }),
 		});
-		App.mockImplementation(() => ({
-			getInstallationOctokit: mockGetInstallationOctokit,
-		}));
+		App.mockImplementation(
+			class {
+				getInstallationOctokit = mockGetInstallationOctokit;
+			},
+		);
 	});
 
 	it("returns installation repositories as JSON", async () => {

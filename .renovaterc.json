@@ -20,6 +20,14 @@
 			"groupName": "pnpm",
 			"matchPackageNames": ["pnpm", "pnpm/pnpm"],
 			"separateMajorMinor": false
+		},
+		{
+			"groupName": "vitest",
+			"matchPackageNames": [
+				"vitest",
+				"@vitest/**",
+				"@cloudflare/vitest-pool-workers"
+			]
 		}
 	],
 	"customManagers": [
