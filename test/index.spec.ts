@@ -136,4 +136,83 @@ describe("GitHub Apps API worker", () => {
 		expect(response.headers.get("Content-Type")).toBe("application/json");
 		expect(await response.json()).toEqual({ error: "GitHub API failure" });
 	});
+
+	it("returns 404 for a non-root path", async () => {
+		const request = new Request("http://example.com/other") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(request, mockEnv, ctx);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(404);
+		expect(await response.json()).toEqual({ error: "Not Found" });
+	});
+
+	it("returns 404 for a non-GET method", async () => {
+		const request = new Request("http://example.com", {
+			method: "POST",
+		}) as Request<unknown, IncomingRequestCfProperties>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(request, mockEnv, ctx);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(404);
+		expect(await response.json()).toEqual({ error: "Not Found" });
+	});
+
+	it("returns 401 when API_TOKEN is set and no Authorization header is sent", async () => {
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(
+			request,
+			{ ...mockEnv, API_TOKEN: "secret-token" },
+			ctx,
+		);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(401);
+		expect(await response.json()).toEqual({ error: "Unauthorized" });
+	});
+
+	it("returns 401 when API_TOKEN is set and the wrong token is sent", async () => {
+		const request = new Request("http://example.com", {
+			headers: { Authorization: "Bearer wrong-token" },
+		}) as Request<unknown, IncomingRequestCfProperties>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(
+			request,
+			{ ...mockEnv, API_TOKEN: "secret-token" },
+			ctx,
+		);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(401);
+		expect(await response.json()).toEqual({ error: "Unauthorized" });
+	});
+
+	it("returns installation repositories when the correct token is sent", async () => {
+		const request = new Request("http://example.com", {
+			headers: { Authorization: "Bearer secret-token" },
+		}) as Request<unknown, IncomingRequestCfProperties>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(
+			request,
+			{ ...mockEnv, API_TOKEN: "secret-token" },
+			ctx,
+		);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.headers.get("Content-Type")).toBe("application/json");
+		expect(await response.json()).toEqual(mockRepositoriesData);
+	});
 });
