@@ -51,7 +51,10 @@ describe("GitHub Apps API worker", () => {
 	});
 
 	it("returns a 400 config error when APP_ID and PRIVATE_KEY are missing", async () => {
-		const request = new Request("http://example.com");
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
 		const ctx = createExecutionContext();
 
 		const response = await worker.fetch(
@@ -70,7 +73,10 @@ describe("GitHub Apps API worker", () => {
 	});
 
 	it("returns a 400 config error when INSTALLATION_ID is missing", async () => {
-		const request = new Request("http://example.com");
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
 		const ctx = createExecutionContext();
 
 		const response = await worker.fetch(
