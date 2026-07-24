@@ -47,15 +47,24 @@ export default {
 			);
 		}
 
-		const installationOctokit =
-			await app.getInstallationOctokit(installationId);
+		try {
+			const installationOctokit =
+				await app.getInstallationOctokit(installationId);
 
-		const { data } = await installationOctokit.request(
-			"GET /installation/repositories",
-		);
+			const { data } = await installationOctokit.request(
+				"GET /installation/repositories",
+			);
 
-		return new Response(JSON.stringify(data), {
-			headers: { "Content-Type": "application/json" },
-		});
+			return new Response(JSON.stringify(data), {
+				headers: { "Content-Type": "application/json" },
+			});
+		} catch (error) {
+			console.error(error);
+			const message = error instanceof Error ? error.message : "Unknown error";
+			return new Response(JSON.stringify({ error: message }), {
+				status: 502,
+				headers: { "Content-Type": "application/json" },
+			});
+		}
 	},
 } satisfies ExportedHandler<Env>;

@@ -93,4 +93,28 @@ describe("GitHub Apps API worker", () => {
 			missing: ["INSTALLATION_ID"],
 		});
 	});
+
+	it("returns a 502 JSON error response when the GitHub API call fails", async () => {
+		const mockGetInstallationOctokit = vi.fn().mockResolvedValue({
+			request: vi.fn().mockRejectedValue(new Error("GitHub API failure")),
+		});
+		vi.mocked(App).mockImplementation(
+			class {
+				getInstallationOctokit = mockGetInstallationOctokit;
+			} as unknown as typeof App,
+		);
+
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(request, mockEnv, ctx);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(502);
+		expect(response.headers.get("Content-Type")).toBe("application/json");
+		expect(await response.json()).toEqual({ error: "GitHub API failure" });
+	});
 });
