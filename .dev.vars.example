@@ -1,0 +1,12 @@
+# Copy this file to `.dev.vars` and fill in real values for local development.
+# `.dev.vars` is read by `wrangler dev` and is gitignored — never commit it.
+
+# The GitHub App's ID.
+APP_ID=123456
+
+# The GitHub App's private key (PEM format). Keep the literal "\n" line breaks
+# when storing a multi-line key on a single line.
+PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+
+# The ID of the installation whose repositories should be listed.
+INSTALLATION_ID=12345678
