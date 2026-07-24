@@ -26,6 +26,10 @@ This worker authenticates as a GitHub App (via `@octokit/app`), gets an installa
 access token for a specific installation, and calls `GET /installation/repositories`.
 It returns that installation's repository list as JSON.
 
+Routing is handled by [Hono](https://hono.dev/): only `GET /` is served (anything else
+returns a JSON `404`), and an optional `Authorization: Bearer` check is applied via
+Hono's `bearerAuth` middleware when `API_TOKEN` is configured (see below).
+
 ## Configuration
 
 The worker reads the following secrets from `env` (see `src/index.ts`):

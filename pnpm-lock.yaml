@@ -11,6 +11,9 @@ importers:
       '@octokit/app':
         specifier: 16.1.2
         version: 16.1.2
+      hono:
+        specifier: 4.12.31
+        version: 4.12.31
     devDependencies:
       '@cloudflare/vitest-pool-workers':
         specifier: 0.18.6
@@ -1014,6 +1017,10 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  hono@4.12.31:
+    resolution: {integrity: sha512-zJIHFrl6bq3RDd2YusFNCDlM8qUprxKswyi/OPzPyzKDdyBXDqWx8bZlZ7R+saTdSTatUmb3O7K4SspGPaEOQg==}
+    engines: {node: '>=16.9.0'}
 
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
@@ -2131,6 +2138,8 @@ snapshots:
   gensync@1.0.0-beta.2: {}
 
   has-flag@4.0.0: {}
+
+  hono@4.12.31: {}
 
   html-escaper@2.0.2: {}
 
