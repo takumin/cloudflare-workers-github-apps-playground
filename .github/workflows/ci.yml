@@ -18,6 +18,8 @@ jobs:
       uses: ./.github/actions/setup-aqua
     - name: Setup pnpm
       uses: ./.github/actions/setup-pnpm
+    - name: Running Typecheck
+      run: pnpm run typecheck
     - name: Running Lint
       run: pnpm run lint
     - name: Running Test

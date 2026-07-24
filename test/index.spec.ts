@@ -12,10 +12,13 @@ vi.mock("@octokit/app", () => ({
 
 describe("GitHub Apps API worker", () => {
 	const mockEnv = {
+		MODE: "development",
 		APP_ID: "test-app-id",
+		CLIENT_ID: "test-client-id",
+		CLIENT_SECRET: "test-client-secret",
 		PRIVATE_KEY: "test-private-key",
 		INSTALLATION_ID: "12345",
-	};
+	} satisfies Env;
 
 	const mockRepositoriesData = {
 		repositories: [{ name: "test-repo" }],
@@ -26,15 +29,18 @@ describe("GitHub Apps API worker", () => {
 		const mockGetInstallationOctokit = vi.fn().mockResolvedValue({
 			request: vi.fn().mockResolvedValue({ data: mockRepositoriesData }),
 		});
-		App.mockImplementation(
+		vi.mocked(App).mockImplementation(
 			class {
 				getInstallationOctokit = mockGetInstallationOctokit;
-			},
+			} as unknown as typeof App,
 		);
 	});
 
 	it("returns installation repositories as JSON", async () => {
-		const request = new Request("http://example.com");
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
 		const ctx = createExecutionContext();
 
 		const response = await worker.fetch(request, mockEnv, ctx);
