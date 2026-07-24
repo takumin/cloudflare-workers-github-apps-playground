@@ -94,6 +94,25 @@ describe("GitHub Apps API worker", () => {
 		});
 	});
 
+	it("returns a 400 error when INSTALLATION_ID is not a number", async () => {
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(
+			request,
+			{ ...mockEnv, INSTALLATION_ID: "not-a-number" },
+			ctx,
+		);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(400);
+		expect(response.headers.get("Content-Type")).toBe("application/json");
+		expect(await response.json()).toEqual({ error: "Invalid INSTALLATION_ID" });
+	});
+
 	it("returns a 502 JSON error response when the GitHub API call fails", async () => {
 		const mockGetInstallationOctokit = vi.fn().mockResolvedValue({
 			request: vi.fn().mockRejectedValue(new Error("GitHub API failure")),
