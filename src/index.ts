@@ -1,21 +1,9 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.toml`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+// GitHub Apps API playground worker — returns the installation's repository list as JSON.
 
 import { App } from "@octokit/app";
 
 export default {
-	// eslint-disable-next-line no-unused-vars
-	async fetch(request, env, ctx): Promise<Response> {
+	async fetch(_request, env, _ctx): Promise<Response> {
 		const missing: string[] = [];
 		if (!env.APP_ID) missing.push("APP_ID");
 		if (!env.PRIVATE_KEY) missing.push("PRIVATE_KEY");
