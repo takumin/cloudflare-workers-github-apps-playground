@@ -26,9 +26,15 @@ This worker authenticates as a GitHub App (via `@octokit/app`), gets an installa
 access token for a specific installation, and calls `GET /installation/repositories`.
 It returns that installation's repository list as JSON.
 
-Routing is handled by [Hono](https://hono.dev/): only `GET /` is served (anything else
-returns a JSON `404`), and an optional `Authorization: Bearer` check is applied via
-Hono's `bearerAuth` middleware when `API_TOKEN` is configured (see below).
+Routing is handled by [Hono](https://hono.dev/): only `GET /` is served, and an optional
+`Authorization: Bearer` check is applied via Hono's `bearerAuth` middleware when
+`API_TOKEN` is configured (see below).
+
+When `API_TOKEN` is unset, any request other than `GET /` returns a JSON `404`. When
+`API_TOKEN` is set, the auth middleware runs before route matching, so an unauthenticated
+request returns `401` (missing or wrong token) or `400` (a malformed, non-`Bearer`
+`Authorization` header) regardless of path or method; a request that passes auth but
+isn't `GET /` still returns the JSON `404`.
 
 ## Configuration
 

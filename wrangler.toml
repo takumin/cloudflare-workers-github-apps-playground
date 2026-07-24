@@ -27,8 +27,10 @@ mode = "smart"
 #
 # Optional secret: API_TOKEN
 # If set (via `wrangler secret put API_TOKEN`), requests must send
-# `Authorization: Bearer <API_TOKEN>` or the worker returns 401. Left unset
-# (e.g. local/default dev), the check is skipped entirely. Not declared in
+# `Authorization: Bearer <API_TOKEN>`. A missing or non-matching token returns
+# 401; a malformed, non-`Bearer` `Authorization` header returns 400 (from Hono's
+# bearerAuth). Left unset (e.g. local/default dev), the check is skipped
+# entirely. Not declared in
 # [vars] since it's a secret; add it with `wrangler secret put API_TOKEN`,
 # then regenerate `worker-configuration.d.ts` via `wrangler types` so it's
 # reflected in the generated Env type.
