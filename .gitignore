@@ -174,3 +174,7 @@ dist
 # certificate files
 
 *.pem
+
+# Claude Code local runtime artifacts (e.g. agent worktrees)
+
+.claude/
