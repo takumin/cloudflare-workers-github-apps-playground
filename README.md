@@ -20,6 +20,46 @@ To run:
 pnpm run dev
 ```
 
+## What this worker does
+
+This worker authenticates as a GitHub App (via `@octokit/app`), gets an installation
+access token for a specific installation, and calls `GET /installation/repositories`.
+It returns that installation's repository list as JSON.
+
+## Configuration
+
+The worker reads the following secrets from `env` (see `src/index.ts`):
+
+- `APP_ID` — the GitHub App's ID.
+- `PRIVATE_KEY` — the GitHub App's private key (PEM format).
+- `INSTALLATION_ID` — the ID of the installation whose repositories should be listed.
+
+`wrangler.toml` also defines a plain (non-secret) variable under `[vars]`:
+
+- `MODE` — currently set to `"development"`.
+
+### Deployed secrets
+
+For a deployed worker, set the secrets with `wrangler secret put`:
+
+```bash
+wrangler secret put APP_ID
+wrangler secret put PRIVATE_KEY
+wrangler secret put INSTALLATION_ID
+```
+
+### Local development
+
+For `pnpm run dev` (which runs `wrangler dev`), wrangler reads secrets from a local
+`.dev.vars` file instead. Copy `.dev.vars.example` to `.dev.vars` and fill in your own
+values:
+
+```bash
+cp .dev.vars.example .dev.vars
+```
+
+`.dev.vars` is gitignored and should never be committed.
+
 # Reference
 
 - [octokit/app.js: GitHub Apps toolset for Node.js](https://github.com/octokit/app.js/)
