@@ -49,4 +49,48 @@ describe("GitHub Apps API worker", () => {
 		expect(response.headers.get("Content-Type")).toBe("application/json");
 		expect(await response.json()).toEqual(mockRepositoriesData);
 	});
+
+	it("returns a 400 config error when APP_ID and PRIVATE_KEY are missing", async () => {
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(
+			request,
+			{ ...mockEnv, APP_ID: "", PRIVATE_KEY: "" },
+			ctx,
+		);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(400);
+		expect(response.headers.get("Content-Type")).toBe("application/json");
+		expect(await response.json()).toEqual({
+			error: "Missing required configuration",
+			missing: ["APP_ID", "PRIVATE_KEY"],
+		});
+	});
+
+	it("returns a 400 config error when INSTALLATION_ID is missing", async () => {
+		const request = new Request("http://example.com") as Request<
+			unknown,
+			IncomingRequestCfProperties
+		>;
+		const ctx = createExecutionContext();
+
+		const response = await worker.fetch(
+			request,
+			{ ...mockEnv, INSTALLATION_ID: "" },
+			ctx,
+		);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(400);
+		expect(response.headers.get("Content-Type")).toBe("application/json");
+		expect(await response.json()).toEqual({
+			error: "Missing required configuration",
+			missing: ["INSTALLATION_ID"],
+		});
+	});
 });
