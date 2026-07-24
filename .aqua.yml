@@ -13,7 +13,7 @@ packages:
 - name: nodejs/node
   version: v24.18.0 # renovate: datasource=github-releases depName=nodejs/node
 - name: pnpm/pnpm@v11.17.0
-- name: biomejs/biome@cli/v1.9.4
+- name: biomejs/biome@cli/v2.5.5
 - name: google/yamlfmt@v0.21.0
 - name: tamasfe/taplo@0.10.0
 - name: evilmartians/lefthook@v2.1.10
