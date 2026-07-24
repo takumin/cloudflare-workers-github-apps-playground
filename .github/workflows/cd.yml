@@ -1,0 +1,33 @@
+---
+name: CD
+on:
+  push:
+    branches:
+    - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  deploy:
+    name: Deploy
+    # Skip cleanly (not fail) until the maintainer configures the
+    # CLOUDFLARE_API_TOKEN repository secret.
+    if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - name: Checkout
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+    - name: Setup aqua
+      uses: ./.github/actions/setup-aqua
+    - name: Setup pnpm
+      uses: ./.github/actions/setup-pnpm
+    - name: Deploy
+      uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3.15.0
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        command: deploy
